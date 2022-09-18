@@ -47,18 +47,18 @@ function M.paste_img()
         print("Value submitted: ", value)
         vim.fn.mkdir("img","p")
         local stdPath = vim.fn.stdpath("data")
-        installPath = stdPath .. "/site/pack/packer/start/md-image-paste"
+        local installPath = stdPath .. "/site/pack/packer/start/md-image-paste"
         local ret = os.capture("bash "..  installPath .."/getimg.sh")
         if ret == "noimg" then
             print("noimg")
-            ret
+            return
         end
-        api = vim.api
+        local api = vim.api
         
 
         api.nvim_command("!mv /tmp/rcopy/test.png ./img/".. value .. ".png")
         local pos = api.nvim_win_get_cursor(0)
-        api.nvim_command("normal! a!["..value .. "](img/"..value..".png")
+        api.nvim_command("normal! a!["..value .. "](img/"..value..".png)")
         local line, col = unpack(pos)
         api.nvim_win_set_cursor(0,{line,col+2})
         api.nvim_command("normal! vt]\\<C-g>")
@@ -76,6 +76,11 @@ function M.paste_img()
     end)
 end
 
+
+function M.setup(user_config)
+
+    require('prozhou.commands').setup()
+end
 
 
 return M

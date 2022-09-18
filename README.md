@@ -1,7 +1,19 @@
 
+## Usage
 
+### get it 
+for packer
+```lua
+  use {'MunifTanjim/nui.nvim'}
+  use {'zhoupro/md-image-paste'}
+```
 
+### set  it 
 
 ```lua
-use {'MunifTanjim/nui.nvim'|
+require('md-image-paste').setup({})
 ```
+
+
+### use it
+use `PasteImg` command
