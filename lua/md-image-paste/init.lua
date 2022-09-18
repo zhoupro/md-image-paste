@@ -79,7 +79,7 @@ end
 
 function M.setup(user_config)
 
-    require('prozhou.commands').setup()
+    require('md-image-paste.commands').setup()
 end
 
 
