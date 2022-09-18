@@ -46,12 +46,16 @@ function M.paste_img()
     on_submit = function(value)
         print("Value submitted: ", value)
         vim.fn.mkdir("img","p")
-        local ret = os.capture("bash /vagrant_data/shs/getimg.sh")
+        local stdPath = vim.fn.stdpath("data")
+        installPath = stdPath .. "/site/pack/packer/start/md-image-paste"
+        local ret = os.capture("bash "..  installPath .."/getimg.sh")
         if ret == "noimg" then
             print("noimg")
             ret
         end
         api = vim.api
+        
+
         api.nvim_command("!mv /tmp/rcopy/test.png ./img/".. value .. ".png")
         local pos = api.nvim_win_get_cursor(0)
         api.nvim_command("normal! a!["..value .. "](img/"..value..".png")
